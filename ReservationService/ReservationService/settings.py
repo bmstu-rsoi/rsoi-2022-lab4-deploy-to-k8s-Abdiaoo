@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'reservations',
-        'USER':'program',
-        'PASSWORD':'test',
+        'USER':'postgres',
+        'PASSWORD':'postgres',
         'HOST':'postgres-dbs',
         'PORT': 5432
     }
