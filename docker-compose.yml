@@ -1,20 +1,7 @@
 version: "3"
 services:
-  postgres-dbs:
-    image: library/postgres:13
-    container_name: postgres-dbs
-    restart: on-failure
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_MULTIPLE_DATABASES=postgres,payments,reservations,loyalties
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
   gatewayservice:
-    container_name: gatewayservice
-    image: abdiaoo/micro/gatewayservice:latest
+    image: abdiaoo/gatewayservice
     build:
       context: ./Gatewayservice
     restart: always
@@ -22,14 +9,8 @@ services:
       - "8080:8080"
     volumes:
       - .:/app/Gatewayservice
-    depends_on:
-      - postgres-dbs
-      - paymentservice
-      - loyaltyservice
-      - reservationservice
   paymentservice:
-    container_name: paymentservice
-    image: abdiaoo/micro/paymentservice:latest
+    image: abdiaoo/paymentservice
     build:
       context: ./PaymentService
     restart: always
@@ -37,11 +18,8 @@ services:
       - "8060:8060"
     volumes:
       - .:/app/PaymentService
-    depends_on:
-      - postgres-dbs
   loyaltyservice:
-    container_name: loyaltyservice
-    image: abdiaoo/micro/loyaltyservice:latest
+    image: abdiaoo/loyaltyservice
     build:
       context: ./LoyaltyService
     restart: always
@@ -49,11 +27,8 @@ services:
       - "8050:8050"
     volumes:
       - .:/app/LoyaltyService
-    depends_on:
-      - postgres-dbs
   reservationservice:
-    container_name: reservationservice
-    image: abdiaoo/micro/reservationservice:latest
+    image: abdiaoo/reservationservice
     build:
       context: ./ReservationService
     restart: always
@@ -61,7 +36,3 @@ services:
       - "8070:8070"
     volumes:
       - .:/app/ReservationService
-    depends_on:
-      - postgres-dbs
-volumes:
-  db-data:
