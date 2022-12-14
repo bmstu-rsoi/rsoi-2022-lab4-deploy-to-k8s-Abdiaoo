@@ -12,14 +12,22 @@ jobs:
           fetch-depth: 0
 
       - uses: docker/setup-buildx-action@v2
+      - name: Build images
+        run: docker-compose build
+      
+      - name: Push images
+        run: |
+          docker login -u abdiaoo -p 
+          docker-compose push
+      
 
       # TODO build, publish to docker hub, deploy to k8s
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
-          collection: <variant>/postman/collection.json
-          environment: <variant>/postman/environment.json
+          collection: v2/postman/collection.json
+          environment: v2/postman/environment.json
           delayRequest: 100
           reporters: '[ "cli" ]'
 
