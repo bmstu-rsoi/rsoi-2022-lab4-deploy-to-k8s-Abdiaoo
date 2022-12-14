@@ -2,6 +2,8 @@ name: GitHub Classroom Workflow
 on:
   push:
     branches: [ master ]
+env:
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 jobs:
   build:
     name: Autograding
@@ -17,7 +19,7 @@ jobs:
       
       - name: Push images
         run: |
-          docker login -u abdiaoo -p 
+          docker login -u abdiaoo -p $DOCKERHUB_PASSWORD
           docker-compose push
       
 
