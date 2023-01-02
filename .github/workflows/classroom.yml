@@ -14,6 +14,10 @@ jobs:
           fetch-depth: 0
 
       - uses: docker/setup-buildx-action@v2
+      - name: Login to yandex cloud container registry
+        uses: yc-actions/yc-cr-login@v1
+        with:
+          yc-sa-json-credentials: ${{secrets.YC_SA_JSON_CREDENTIALS}}
       - name: Build images
         run: docker-compose build
       
