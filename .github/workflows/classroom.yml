@@ -9,6 +9,7 @@ jobs:
     name: Autograding
     runs-on: ubuntu-latest
     steps:
+      - uses: docker/setup-buildx-action@v2
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -17,14 +18,18 @@ jobs:
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-      - uses: docker/setup-buildx-action@v2
       - name: Build images
-        run: docker-compose build
-      
+        run: |
+          docker build ./LoyaltyService/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/loyalty:latest
+          docker build ./PaymentService/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/payment:latest
+          docker build ./ReservationService/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/reservation:latest
+          docker build ./Gatewayservice/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/gateway:latest
       - name: Push images
         run: |
-          docker login -u abdiaoo -p $DOCKERHUB_PASSWORD
-          docker-compose push
+          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/loyalty:latest
+          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/payment:latest
+          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/reservation:latest
+          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/gateway:latest
       
 
       # TODO build, publish to docker hub, deploy to k8s
