@@ -13,25 +13,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Login to Yandex Cloud Container Registry
-        id: login-cr
-        uses: yc-actions/yc-cr-login@v1
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-      - name: Build images
-        run: |
-          docker build ./LoyaltyService/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/loyalty:latest
-          docker build ./PaymentService/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/payment:latest
-          docker build ./ReservationService/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/reservation:latest
-          docker build ./Gatewayservice/ --tag cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/gateway:latest
-      - name: Push images
-        run: |
-          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/loyalty:latest
-          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/payment:latest
-          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/reservation:latest
-          docker push cr.yandex/${{secrets.CONTAINER_REGISTRY_ID}}/gateway:latest
       
-
       # TODO build, publish to docker hub, deploy to k8s
 
       - name: Run API Tests
