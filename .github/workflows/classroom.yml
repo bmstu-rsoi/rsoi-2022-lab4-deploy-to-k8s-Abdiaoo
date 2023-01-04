@@ -32,6 +32,14 @@ jobs:
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
       - name: Init Helm
         run: helm init --client-only
+      - name: Deploy to the cluster
+        run: |
+          cd k8s
+          helm delete postgres
+          helm delete services
+          helm install postgres postgres-chart/
+          helm install services services-chart/
+          sleep 90
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
