@@ -22,7 +22,7 @@ jobs:
         run: doctl registry login
       - name: Build Images
         run: |
-          docker build -f ./LoyaltyService/Dockerfile -t ${{ env.REGISTRY }}/loyalty:latest
+          docker build ./LoyaltyService/Dockerfile --tag ${{ env.REGISTRY }}/loyalty:latest
           docker build -f ./PaymentService/Dockerfile -t ${{ env.REGISTRY }}/payment:latest
       - name: Run API Tests
         uses: matt-ball/newman-action@master
