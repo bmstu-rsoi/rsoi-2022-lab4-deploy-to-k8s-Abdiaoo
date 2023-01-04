@@ -5,6 +5,7 @@ on:
 env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
   REGISTRY: "registry.digitalocean.com/cfe-k8s-rsoi"
+  
 jobs:
   build:
     name: Autograding
@@ -24,6 +25,9 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
       - name: Push image in to Digital ocean Container Registry
         run: docker compose push
+      - name: k8s cluster kubeconfig
+        run: |
+          doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
