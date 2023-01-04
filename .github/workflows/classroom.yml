@@ -1,7 +1,7 @@
 name: GitHub Classroom Workflow
 on:
   push:
-    branches: [ master ]
+    branches: [ autre ]
 env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
   REGISTRY: "registry.digitalocean.com/cfe-k8s-rsoi"
