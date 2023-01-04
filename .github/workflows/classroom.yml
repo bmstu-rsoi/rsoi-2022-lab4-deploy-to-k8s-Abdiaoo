@@ -28,6 +28,8 @@ jobs:
       - name: k8s cluster kubeconfig
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
+      - name: Init Helm
+        run: helm init --client-only
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
