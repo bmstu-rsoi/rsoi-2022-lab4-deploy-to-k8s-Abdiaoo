@@ -35,7 +35,8 @@ jobs:
       - name: au
         run: |
           cd k8s
-          dir
+          helm list
+          kubectl get all
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
