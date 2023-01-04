@@ -1,7 +1,7 @@
 version: "3"
 services:
   gatewayservice:
-    image: abdiaoo/gatewayservice
+    image: registry.digitalocean.com/cfe-k8s-rsoi/gatewayservice
     build:
       context: ./Gatewayservice
     restart: always
@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app/Gatewayservice
   paymentservice:
-    image: abdiaoo/paymentservice
+    image: registry.digitalocean.com/cfe-k8s-rsoi/paymentservice
     build:
       context: ./PaymentService
     restart: always
@@ -19,7 +19,7 @@ services:
     volumes:
       - .:/app/PaymentService
   loyaltyservice:
-    image: abdiaoo/loyaltyservice
+    image: registry.digitalocean.com/cfe-k8s-rsoi/loyaltyservice
     build:
       context: ./LoyaltyService
     restart: always
@@ -28,7 +28,7 @@ services:
     volumes:
       - .:/app/LoyaltyService
   reservationservice:
-    image: abdiaoo/reservationservice
+    image: registry.digitalocean.com/cfe-k8s-rsoi/reservationservice
     build:
       context: ./ReservationService
     restart: always
