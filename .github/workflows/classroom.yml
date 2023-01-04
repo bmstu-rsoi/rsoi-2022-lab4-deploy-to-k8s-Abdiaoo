@@ -25,6 +25,8 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
       - name: Push image in to Digital ocean Container Registry
         run: docker compose push
+      - name: Install helm
+        run: curl -L https://git.io/get_helm.sh | bash
       - name: k8s cluster kubeconfig
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
