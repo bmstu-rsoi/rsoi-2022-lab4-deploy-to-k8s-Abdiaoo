@@ -21,7 +21,9 @@ jobs:
         with:
           token: ${{ secrets.DO_API_TOKEN_KEY }}
       - name: Login to docker container registry
-        run: doctl registry login
+        run: doctl registry login --expiry-seconds 1200
+      - name: Push image in to Digital ocean Container Registry
+        run: docker compose push
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
