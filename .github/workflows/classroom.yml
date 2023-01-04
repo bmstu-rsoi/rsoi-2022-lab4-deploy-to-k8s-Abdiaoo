@@ -14,16 +14,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Build Images
+        run: docker compose -f docker-compose.yaml
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DO_API_TOKEN_KEY }}
       - name: Login to docker container registry
         run: doctl registry login
-      - name: Build Images
-        run: |
-          docker build LoyaltyService/Dockerfile --tag ${{ env.REGISTRY }}/loyalty:latest
-          docker build ./PaymentService/Dockerfile -t ${{ env.REGISTRY }}/payment:latest
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
