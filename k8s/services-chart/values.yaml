@@ -2,7 +2,7 @@ loyalty:
   service:
     port: 8050
     image:
-      name: abdiaoo/loyaltyservice
+      name: registry.digitalocean.com/cfe-k8s-rsoi/loyaltyservice
       version: "latest"
     database:
       name: loyalties
@@ -10,7 +10,7 @@ payment:
   service:
     port: 8060
     image:
-      name: abdiaoo/paymentservice
+      name: registry.digitalocean.com/cfe-k8s-rsoi/paymentservice
       version: "latest"
     database:
       name: payments
@@ -18,7 +18,7 @@ reservation:
   service:
     port: 8070
     image:
-      name: abdiaoo/reservationservice
+      name: registry.digitalocean.com/cfe-k8s-rsoi/reservationservice
       version: "latest"
     database:
       name: reservations
@@ -26,6 +26,6 @@ gateway:
   service:
     port: 8080
     image:
-      name: abdiaoo/gatewayservice
+      name: registry.digitalocean.com/cfe-k8s-rsoi/gatewayservice
       version: "latest"
     isGateway: true
