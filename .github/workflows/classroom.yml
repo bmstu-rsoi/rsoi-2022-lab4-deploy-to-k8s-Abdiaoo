@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Build Images
-        run: docker compose -f docker-compose.yaml
+        run: docker compose -f docker-compose.yaml build
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
