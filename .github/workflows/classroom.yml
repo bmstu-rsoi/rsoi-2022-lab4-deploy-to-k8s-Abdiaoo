@@ -30,7 +30,7 @@ jobs:
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
       - name: au
         run: |
-          helm uninstall nginx-ingress nginx-stable/nginx-ingress
+          helm list
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
