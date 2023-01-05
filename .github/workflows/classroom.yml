@@ -31,12 +31,10 @@ jobs:
       - name: Deployment to the cluster
         run: |
           cd k8s
-          helm uninstall postgres 
-          helm uninstall services
-          sleep 30
-          helm install postgres postgres-chart/
-          helm install services services-chart/
-          sleep 60
+          helm upgrade --install postgres postgres-chart/
+          helm upgrade --install services services-chart/
+          kubectl apply -f load-Balancer.yaml
+          sleep 120
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
