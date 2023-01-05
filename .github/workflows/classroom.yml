@@ -30,7 +30,7 @@ jobs:
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
       - name: au
         run: |
-          helm list
+          doctl k8s cluster kubeconfig show rsoi-k8s > .kubeconfig
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
