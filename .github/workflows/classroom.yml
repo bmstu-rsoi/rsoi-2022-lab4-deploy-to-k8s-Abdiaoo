@@ -38,7 +38,7 @@ jobs:
           cd k8s
           helm install postgres postgres-chart/
           helm install services services-chart/
-          kubectl delete -f load-Balancer.yaml
+          kubectl apply -f load-Balancer.yaml
           sleep 120
       - name: Run API Tests
         uses: matt-ball/newman-action@master
