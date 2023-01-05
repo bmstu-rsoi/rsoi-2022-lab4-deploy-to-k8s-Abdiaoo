@@ -28,17 +28,13 @@ jobs:
       - name: k8s cluster kubeconfig
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
-      - name: ingress-controller
+      - name: Deployment to the cluster
         run: |
-          helm repo add nginx-stable https://helm.nginx.com/stable
-          helm repo update
-          helm install nginx-ingress nginx-stable/nginx-ingress
-      - name: au
-        run: |
-          kubectl get all
           cd k8s
           helm upgrade --install postgres postgres-chart/
           helm upgrade --install services services-chart/
+          kubectl apply -f load-balancer.yaml
+          sleep 60
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
