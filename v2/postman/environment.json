@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "http://gateway.com",
+			"value": "http://206.189.240.178:8080/",
 			"enabled": true
 		}
 	],
