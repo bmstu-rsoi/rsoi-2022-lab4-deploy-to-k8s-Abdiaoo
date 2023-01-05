@@ -30,9 +30,7 @@ jobs:
           doctl kubernetes cluster kubeconfig save --expiry-seconds 1200 rsoi-k8s
       - name: au
         run: |
-          doctl kubernetes cluster show rsoi-k8s > .kubeconfig
-          cd k8s
-          helm upgrade --install --kubeconfig=.kubeconfig postgres postgres-chart/
+          helm install nginx-ingress nginx-stable/nginx-ingress
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
