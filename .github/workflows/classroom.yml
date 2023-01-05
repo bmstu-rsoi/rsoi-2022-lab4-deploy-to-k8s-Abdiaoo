@@ -31,6 +31,9 @@ jobs:
       - name: au
         run: |
           doctl k8s cluster kubeconfig show rsoi-k8s > .kubeconfig
+          kubectl get all
+          cd k8s
+          helm upgrade --install --kubeconfig=.kubeconfig postgres postgres-chart/
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
