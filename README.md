@@ -1,5 +1,5 @@
 # Лабораторная работа #4
-.
+
 ![GitHub Classroom Workflow](../../workflows/GitHub%20Classroom%20Workflow/badge.svg?branch=master)
 
 ## Deploy to Cloud
