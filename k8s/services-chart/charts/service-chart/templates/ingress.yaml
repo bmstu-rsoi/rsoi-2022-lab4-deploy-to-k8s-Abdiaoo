@@ -11,7 +11,7 @@ metadata:
 spec:
 {{/*  ingressClassName: nginx*/}}
   rules:
-    - host: {{ .Chart.Name }}.{{ .Values.domain }}
+    - host: {{ .Chart.Name }}
       http:
         paths:
           - path: /
