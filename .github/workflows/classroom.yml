@@ -33,7 +33,6 @@ jobs:
           cd k8s
           helm upgrade --install postgres postgres-chart/
           helm upgrade --install services services-chart/
-          kubectl apply -f load-balancer.yaml
           sleep 60
       - name: Run API Tests
         uses: matt-ball/newman-action@master
